@@ -1,0 +1,18 @@
+using System;
+
+namespace RFIDReader
+{
+    public class rfidReader : IRfidReader
+    {
+        public event EventHandler<rfidEventArgs>? RfidDetected;
+
+        public int idValue {get; private set;}
+
+  
+
+        private void onReadId()
+        {
+            RfidDetected?.Invoke(this, new rfidEventArgs(){id = this.idValue});
+        }
+    }
+}
