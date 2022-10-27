@@ -4,7 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ladeskab.Interfaces;
+using UsbSimulator;
+//using Ladeskab.Interfaces;
 
 namespace Ladeskab
 {
@@ -20,7 +21,7 @@ namespace Ladeskab
 
         // Her mangler flere member variable
         private LadeskabState _state;
-        private IChargeControl _charger;
+        private IUsbCharger _charger;
         private int _oldId;
         private IDoor _door;
 
