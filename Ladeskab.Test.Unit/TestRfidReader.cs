@@ -22,6 +22,8 @@ namespace TestRfidReader
         {
             _rfidEventArgs = null;
             _uut = new RfidReader();
+
+            _uut.rfidEvent += (sender, args) => _rfidEventArgs = args;
         }
 
         [Test]
