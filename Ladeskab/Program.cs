@@ -23,11 +23,11 @@ class Program
                     break;
 
                 case 'O':
-                    door.OnDoorOpen();
+                    //door.OnDoorOpen();
                     break;
 
                 case 'C':
-                    door.OnDoorClose();
+                    //door.OnDoorClose();
                     break;
 
                 case 'R':

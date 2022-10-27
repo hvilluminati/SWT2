@@ -23,7 +23,7 @@ namespace Ladeskab
         private LadeskabState _state;
         private IUsbCharger _charger;
         private int _oldId;
-        private IDoor _door;
+        //private IDoor _door;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
@@ -38,7 +38,7 @@ namespace Ladeskab
                     // Check for ladeforbindelse
                     if (_charger.Connected)
                     {
-                        _door.LockDoor();
+                        //_door.LockDoor();
                         _charger.StartCharge();
                         _oldId = id;
                         using (var writer = File.AppendText(logFile))
@@ -65,7 +65,7 @@ namespace Ladeskab
                     if (id == _oldId)
                     {
                         _charger.StopCharge();
-                        _door.UnlockDoor();
+                        //_door.UnlockDoor();
                         using (var writer = File.AppendText(logFile))
                         {
                             writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
