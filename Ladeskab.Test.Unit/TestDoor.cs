@@ -22,6 +22,7 @@ namespace TestDoor
         {
             _DoorEventArgs = null;
             _uut = new Door();
+            _uut.DoorEvent += (sender, args) => _DoorEventArgs = args;
         }
 
         [Test]
@@ -38,13 +39,33 @@ namespace TestDoor
             _uut.UnlockDoor();
             Assert.That(_uut.Locked, Is.False);
         }
+
+        [Test]
+        public void DoorOpened()
+        {
+            _uut.DoorOpened();
+            Assert.That(_uut.Open, Is.True);
+        }
+
+        [Test]
+        public void DoorOpenedEvent()
+        {
+            _uut.DoorOpened();
+            Assert.That(_DoorEventArgs.DoorOpen, Is.True);
+        }
+
+        [Test]
+        public void DoorClosed()
+        {
+            _uut.DoorClosed();
+            Assert.That(_uut.Open, Is.False);
+        }
+
+        [Test]
+        public void DoorClosedEvent()
+        {
+            _uut.DoorClosed();
+            Assert.That(_DoorEventArgs.DoorOpen, Is.False);
+        }
     }
 }
-
-//_uut.DoorEvent += (sender, args) => _DoorEventArgs = args;
-//_uut.LockDoor();
-//Assert.That(_DoorEventArgs.DoorState, Is.EqualTo(1));
-
-//_uut.DoorEvent += (sender, args) => _DoorEventArgs = args;
-//_uut.UnlockDoor();
-//Assert.That(_DoorEventArgs.DoorState, Is.EqualTo(0));

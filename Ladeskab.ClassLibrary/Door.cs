@@ -21,10 +21,15 @@ namespace Ladeskab
             Locked = true;
         }
 
-        public void OnStateChange(int LockState)
+        public void DoorOpened()
         {
-            Open = !Open;
-            DoorEvent?.Invoke(this, new DoorEventArgs { DoorOpen = Open});
+            Open = true;
+            DoorEvent?.Invoke(this, new DoorEventArgs { DoorOpen = Open });
+        }
+        public void DoorClosed()
+        {
+            Open = false;
+            DoorEvent?.Invoke(this, new DoorEventArgs { DoorOpen = Open });
         }
     }
 }

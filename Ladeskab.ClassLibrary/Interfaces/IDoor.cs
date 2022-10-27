@@ -11,6 +11,7 @@ namespace Ladeskab.Interfaces
     {
         event EventHandler<DoorEventArgs> DoorEvent;
 
-        public void OnStateChange(int LockState);
+        public void DoorOpened();
+        public void DoorClosed();
     }
 }
