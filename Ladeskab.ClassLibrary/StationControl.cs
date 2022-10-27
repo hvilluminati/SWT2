@@ -34,7 +34,7 @@ namespace Ladeskab
         public StationControl(IDisplay display, IUsbCharger charger, IRfidReader rfidReader, string logFile)
         {
             //door.DoorEvent += DoorHandler;
-            rfidReader.rfidEvent += RfidDetected;
+            //rfidReader.rfidEvent += RfidDetected;
             //_door = door;
             _display = display; 
             _charger = charger;
@@ -89,18 +89,18 @@ namespace Ladeskab
                     break;
             }
         }
-        private void DoorHandler(DoorEventArgs e)
-        {
-            switch (_state)
-            {
-                case LadeskabState.Available :
-                    switch (e.DoorState)
-                    {
-                        case 0:
+        //private void DoorHandler(DoorEventArgs e)
+        //{
+        //    switch (_state)
+        //    {
+        //        case LadeskabState.Available :
+        //            switch (e.DoorState)
+        //            {
+        //                case 0:
 
-                    }
-            }
-        }
+        //            }
+        //    }
+        //}
         // Her mangler de andre trigger handlere
     }
 }
