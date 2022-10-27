@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UsbSimulator;
-//using Ladeskab.Interfaces;
+using Ladeskab.Interfaces;
 
 namespace Ladeskab
 {

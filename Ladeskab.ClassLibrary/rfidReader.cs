@@ -1,6 +1,7 @@
 using System;
+using Ladeskab.Interfaces;
 
-namespace RFIDReader
+namespace Ladeskab
 {
     public class rfidReader : IRfidReader
     {

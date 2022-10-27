@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UsbSimulator
+namespace Ladeskab.Interfaces
 {
     public class CurrentEventArgs : EventArgs
     {

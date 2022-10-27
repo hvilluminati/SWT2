@@ -1,6 +1,6 @@
 using System;
 
-namespace RFIDReader
+namespace Ladeskab.Interfaces
 {
     public class rfidEventArgs : EventArgs
     {
