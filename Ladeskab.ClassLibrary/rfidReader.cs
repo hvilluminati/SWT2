@@ -7,14 +7,9 @@ namespace Ladeskab
     {
         public event EventHandler<rfidEventArgs>? rfidEvent;
 
-        public void scanId(int newId)
+        public void OnRfidRead(int newId)
         {
-            onRfid(new rfidEventArgs {id = newId});
-        }
-
-        public void onRfid(rfidEventArgs e)
-        {
-            rfidEvent?.Invoke(this, e);
+            rfidEvent?.Invoke(this, new rfidEventArgs { id = newId });
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Ladeskab.Interfaces
     
     public interface IRfidReader
     {
-         event EventHandler<rfidEventArgs>rfidEvent;
+        event EventHandler<rfidEventArgs>rfidEvent;
+        public void OnRfidRead(int newId);
     }
 };

@@ -6,7 +6,7 @@ class Program
     {
 
         // Assemble your system here from all the classes
-        RFIDReader.IRfidReader rfidReader;
+        IRfidReader rfidReader = new rfidReader();
 
         bool finish = false;
         do
