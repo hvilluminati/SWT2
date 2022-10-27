@@ -37,7 +37,7 @@ namespace TestRfidReader
         {
             _uut.rfidEvent += (o, args) => _rfidEventArgs = args;
             _uut.OnRfidRead(1);
-            Assert.That(_rfidEventArgs.id, Is.Not.Null);
+            Assert.That(_rfidEventArgs.id, Is.EqualTo(1));
         }
 
     }

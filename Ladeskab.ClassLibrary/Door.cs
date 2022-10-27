@@ -8,27 +8,23 @@ namespace Ladeskab
     {
         public event EventHandler<DoorEventArgs>? DoorEvent;
 
-        public int LockState = 0;
+        public bool Locked { get; private set; }
+        public bool Open { get; private set; }
 
-        public void UnlockDoor(int LockState)
+        public void UnlockDoor()
         {
-            if (LockState == 1)
-            {
-                LockState = 0;
-            }
+            Locked = false;
         }
 
-        public void LockDoor(int LockState)
+        public void LockDoor()
         {
-            if (LockState == 0)
-            {
-                LockState = 1;
-            }
+            Locked = true;
         }
 
         public void OnStateChange(int LockState)
         {
-            DoorEvent?.Invoke(this, new DoorEventArgs { DoorState = this.LockState});
+            Open = !Open;
+            DoorEvent?.Invoke(this, new DoorEventArgs { DoorOpen = Open});
         }
     }
 }
