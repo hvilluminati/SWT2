@@ -23,12 +23,13 @@ namespace TestRfidReader
             _rfidEventArgs = null;
             _uut = new RfidReader();
 
-            _uut.rfidEvent += (sender, args) => _rfidEventArgs = args;
+           
         }
 
         [Test]
         public void ctor_IsRfidRead()
         {
+            _uut.rfidEvent += (sender, args) => _rfidEventArgs = args;
             _uut.OnRfidRead(1);
             Assert.That(_rfidEventArgs, Is.Not.Null);
         }
@@ -36,6 +37,7 @@ namespace TestRfidReader
         [Test]
         public void ctor_IsIdCorrect()
         {
+            _uut.rfidEvent += (sender, args) => _rfidEventArgs = args;
             _uut.OnRfidRead(1);
             Assert.That(_rfidEventArgs.id, Is.Not.Null);
         }
