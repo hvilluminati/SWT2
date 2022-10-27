@@ -13,16 +13,28 @@ namespace TestRfidReader
     public class TestRfidReader
     {
         private RfidReader _uut;
+        private rfidEventargs _rfidEventargs;
+
         [SetUp]
         public void Setup()
         {
+            _rfidEventargs = null;
             _uut = new RfidReader();
         }
 
         [Test]
         public void ctor_IsRfidRead()
         {
-            Assert.That(_uut.OnRfidRead, Is.Not.Null);
+            _uut.OnRfidRead(1);
+            Assert.That(_rfidEventargs, Is.Not.Null);
         }
+
+        [Test]
+        public void ctor_IsRfidRead()
+        {
+            _uut.OnRfidRead(1);
+            Assert.That(_rfidEventargs.id, Is.Not.Null);
+        }
+
     }
 }
