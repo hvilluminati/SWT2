@@ -23,7 +23,7 @@ namespace TestRfidReader
             _rfidEventArgs = null;
             _uut = new RfidReader();
 
-           
+
         }
 
         [Test]
