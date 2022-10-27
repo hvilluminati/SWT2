@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ladeskab;
+using Ladeskab.Interfaces;
+
 
 namespace TestRfidReader
 {
@@ -30,7 +32,7 @@ namespace TestRfidReader
         }
 
         [Test]
-        public void ctor_IsRfidRead()
+        public void ctor_IsIdCorrect()
         {
             _uut.OnRfidRead(1);
             Assert.That(_rfidEventargs.id, Is.Not.Null);
