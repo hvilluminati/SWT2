@@ -15,12 +15,12 @@ namespace TestRfidReader
     public class TestRfidReader
     {
         private RfidReader _uut;
-        private rfidEventargs _rfidEventargs;
+        private rfidEventArgs _rfidEventArgs;
 
         [SetUp]
         public void Setup()
         {
-            _rfidEventargs = null;
+            _rfidEventArgs = null;
             _uut = new RfidReader();
         }
 
@@ -28,14 +28,14 @@ namespace TestRfidReader
         public void ctor_IsRfidRead()
         {
             _uut.OnRfidRead(1);
-            Assert.That(_rfidEventargs, Is.Not.Null);
+            Assert.That(_rfidEventArgs, Is.Not.Null);
         }
 
         [Test]
         public void ctor_IsIdCorrect()
         {
             _uut.OnRfidRead(1);
-            Assert.That(_rfidEventargs.id, Is.Not.Null);
+            Assert.That(_rfidEventArgs.id, Is.Not.Null);
         }
 
     }
