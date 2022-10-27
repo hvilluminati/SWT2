@@ -3,7 +3,7 @@ using Ladeskab.Interfaces;
 
 namespace Ladeskab
 {
-    public class rfidReader : IRfidReader
+    public class RfidReader : IRfidReader
     {
         public event EventHandler<rfidEventArgs>? rfidEvent;
 
