@@ -4,15 +4,22 @@ namespace RFIDReader
 {
     public class rfidReader : IRfidReader
     {
-        public event EventHandler<rfidEventArgs>? RfidDetected;
+        
+        private int _oldId;
 
+        public event EventHandler<rfidEventArgs>? rfidEvent;
+
+        public void scanId(int newId)
+        {
+            onRfid(new rfidEventArgs {id = newId});
+            _oldId = newId;
+        }
         public int idValue {get; private set;}
 
-  
 
-        private void onReadId()
+        public void onRfid(rfidEventArgs e)
         {
-            RfidDetected?.Invoke(this, new rfidEventArgs(){id = this.idValue});
+            rfidEvent?.Invoke(this, e);
         }
     }
 }

@@ -12,6 +12,6 @@ namespace RFIDReader
     {
          event EventHandler<rfidEventArgs>RfidDetected;
 
-         int idValue { get; }
+        void onRfidDected();
     }
 };
