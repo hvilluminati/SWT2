@@ -14,8 +14,6 @@ namespace RFIDReader
             onRfid(new rfidEventArgs {id = newId});
             _oldId = newId;
         }
-        public int idValue {get; private set;}
-
 
         public void onRfid(rfidEventArgs e)
         {
