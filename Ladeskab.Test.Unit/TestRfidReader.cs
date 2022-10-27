@@ -21,7 +21,7 @@ namespace TestRfidReader
         [Test]
         public void ctor_IsRfidRead()
         {
-            Assert.That(_uut.OnRfidRead, Is.!NULL);
+            Assert.That(_uut.OnRfidRead, Is.NotZero);
         }
     }
 }
