@@ -5,23 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Ladeskab;
 
 namespace TestRfidReader
 {
     [TestFixture]
     public class TestRfidReader
     {
-        private rfidReader _uut;
+        private RfidReader _uut;
         [SetUp]
         public void Setup()
         {
-            _uut = new rfidReader();
+            _uut = new RfidReader();
         }
 
         [Test]
         public void ctor_IsRfidRead()
         {
-            Assert.That(_uut.OnRfidRead, Is.NotZero);
+            Assert.That(_uut.OnRfidRead, Is.Not.Null);
         }
     }
 }
