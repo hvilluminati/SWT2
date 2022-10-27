@@ -29,14 +29,14 @@ namespace TestDoor
         {
             _uut.DoorEvent += (sender, args) => _DoorEventArgs = args;
             _uut.LockDoor();
-            Assert.That(_DoorEventArgs, Is.False);
+            Assert.That(_DoorEventArgs, Is.EqualTo(1));
         }
         
         public void ctor_DoorUnlocked()
         {
             _uut.DoorEvent += (sender, args) => _DoorEventArgs = args;
             _uut.UnlockDoor();
-            Assert.That(_DoorEventArgs, Is.True);
+            Assert.That(_DoorEventArgs, Is.EqualTo(1));
         }
     }
 }

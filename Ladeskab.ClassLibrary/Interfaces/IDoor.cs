@@ -4,15 +4,13 @@ namespace Ladeskab.Interfaces
 {
     public class DoorEventArgs : EventArgs
     {
-        public bool DoorState { get; set; }
+        public int DoorState { get; set; }
     }
 
     public interface IDoor
     {
         event EventHandler<DoorEventArgs> DoorEvent;
 
-        bool _Lockstate{ get;}
-
-        public void OnStateChange();
+        public void OnStateChange(int LockState);
     }
 }
