@@ -10,7 +10,6 @@ namespace RFIDReader
     
     public interface IRfidReader
     {
-         event EventHandler<rfidEventArgs>RfidDetected;
-
+         event EventHandler<rfidEventArgs>rfidEvent;
     }
 };
