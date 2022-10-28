@@ -47,6 +47,13 @@ namespace TestDoor
         }
 
         [Test]
+        public void DoorOpenedEventHappened()
+        {
+            _uut.DoorOpened();
+            Assert.That(_DoorEventArgs, Is.Not.Null);
+        }
+
+        [Test]
         public void DoorOpenedEvent()
         {
             _uut.DoorOpened();
@@ -61,16 +68,18 @@ namespace TestDoor
         }
 
         [Test]
+        public void DoorClosedEventHappened()
+        {
+            _uut.DoorClosed();
+            Assert.That(_DoorEventArgs, Is.Not.Null);
+        }
+
+        [Test]
         public void DoorClosedEvent()
         {
             _uut.DoorClosed();
             Assert.That(_DoorEventArgs.DoorOpen, Is.False);
         }
-        [Test]
-        public void DoorEvent()
-        {
-            _uut.DoorClosed();
-            Assert.That(_DoorEventArgs, Is.Not.Null);
-        }
+
     }
 }
