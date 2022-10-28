@@ -1,4 +1,5 @@
 using System;
+using System.Net.Sockets;
 
 namespace Ladeskab.Interfaces
 {
@@ -13,5 +14,7 @@ namespace Ladeskab.Interfaces
 
         public void DoorOpened();
         public void DoorClosed();
+        public void UnlockDoor();
+        public void LockDoor();
     }
 }

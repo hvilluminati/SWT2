@@ -1,12 +1,19 @@
 ﻿using Ladeskab;
 using Ladeskab.Interfaces;
+using UsbSimulator;
+
 class Program
 {
     static void Main(string[] args)
     {
 
         // Assemble your system here from all the classes
-        IRfidReader rfidReader = new RfidReader();
+        RfidReader rfidReader = new RfidReader();
+        Door door = new Door();
+        DisplaySimulator display = new DisplaySimulator();
+        UsbChargerSimulator charger = new UsbChargerSimulator();
+        ChargeControl chargeControl = new ChargeControl(charger, display);
+        StationControl stationControl = new StationControl(door,  rfidReader, display, chargeControl, "LogFile.txt");
 
         bool finish = false;
         do
@@ -23,11 +30,11 @@ class Program
                     break;
 
                 case 'O':
-                    //door.OnDoorOpen();
+                    door.DoorOpened();
                     break;
 
                 case 'C':
-                    //door.OnDoorClose();
+                    door.DoorClosed();
                     break;
 
                 case 'R':

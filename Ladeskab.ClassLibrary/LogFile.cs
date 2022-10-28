@@ -18,12 +18,12 @@ namespace Ladeskab
         public void LogDoorLocked(int id)
         {
             using var writer = File.AppendText(FileName);
-            writer.WriteLine(DateTime.Now + " - Door locked with ID: {id}");
+            writer.WriteLine(DateTime.Now + " - Door locked with ID: " + id);
         }
         public void LogDoorUnlocked(int id)
         {
             using var writer = File.AppendText(FileName);
-            writer.WriteLine(DateTime.Now + " - Door unlocked with ID: {id}");
+            writer.WriteLine(DateTime.Now + " - Door unlocked with ID: " + id);
         }
     }
 }
