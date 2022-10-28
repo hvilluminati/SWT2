@@ -66,5 +66,10 @@ namespace TestDoor
             _uut.DoorClosed();
             Assert.That(_DoorEventArgs.DoorOpen, Is.False);
         }
+        [Test]
+        public void DoorEvent()
+        {
+            Assert.That(_DoorEventArgs, Is.Null);
+        }
     }
 }
