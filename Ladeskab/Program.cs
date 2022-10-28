@@ -1,7 +1,5 @@
 ﻿using Ladeskab;
 using Ladeskab.Interfaces;
-using UsbSimulator;
-
 class Program
 {
     static void Main(string[] args)

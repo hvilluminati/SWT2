@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UsbSimulator;
 using Ladeskab.Interfaces;
 using System.Xml.Linq;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ namespace Ladeskab
     public class StationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
-        private enum LadeskabState
+        public enum LadeskabState
         {
             Available,
             Locked,
@@ -22,9 +21,9 @@ namespace Ladeskab
         };
 
         // Her mangler flere member variable
-        private LadeskabState _state;
+        public LadeskabState _state;
         private ChargeControl _chargeControl;
-        private int _oldId;
+        public int _oldId;
         private IDisplay _display;
         private IRfidReader _RfidReader;
         private IDoor _door;
@@ -43,7 +42,7 @@ namespace Ladeskab
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
-        private void RfidDetected(object sender, rfidEventArgs e)
+        public void RfidDetected(object sender, rfidEventArgs e)
         {
             switch (_state)
             {
@@ -89,7 +88,7 @@ namespace Ladeskab
                     break;
             }
         }
-        private void DoorHandler(object sender, DoorEventArgs e)
+        public void DoorHandler(object sender, DoorEventArgs e)
         {
             if(e.DoorOpen)
             {

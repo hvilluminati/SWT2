@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.Test.Unit
 {
+    [TestFixture]
     public class TestDisplay
     {
         private DisplaySimulator _uut;
