@@ -41,6 +41,46 @@ namespace Ladeskab
             _logFile = new LogFile(logFile);
         }
 
+        public DisplaySimulator DisplaySimulator
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public RfidReader RfidReader
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public ChargeControl ChargeControl
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Door Door
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public LogFile LogFile
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         public void RfidDetected(object sender, rfidEventArgs e)
         {
