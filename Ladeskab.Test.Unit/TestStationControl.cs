@@ -15,8 +15,7 @@ namespace Ladeskab.Test.Unit
         private StationControl _uut;
         private IDisplay _display;
         private IDoor _door;
-        private IUsbCharger _charger;
-        private ChargeControl _chargeControl;
+        private IChargeControl _chargeControl;
         private IRfidReader _rfidReader;
         private ILogFile _logFile;
 
@@ -25,8 +24,7 @@ namespace Ladeskab.Test.Unit
         {
             _display = Substitute.For<IDisplay>();
             _door = Substitute.For<IDoor>();
-            _charger = Substitute.For<IUsbCharger>();
-            _chargeControl = Substitute.For<ChargeControl>(_charger, _display);
+            _chargeControl = Substitute.For<IChargeControl>();
             _rfidReader = Substitute.For<IRfidReader>();
             _uut = new StationControl(_door, _rfidReader, _display, _chargeControl, "testlog.txt");
         }
@@ -35,7 +33,7 @@ namespace Ladeskab.Test.Unit
         public void Rfid_Available_Connected_DoorLocked()
         {
             _uut._state = StationControl.LadeskabState.Available;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             _door.Received(1).LockDoor();
         }
@@ -44,25 +42,34 @@ namespace Ladeskab.Test.Unit
         public void Rfid_Available_Connected_StartCharge()
         {
             _uut._state = StationControl.LadeskabState.Available;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
-            _charger.Received(1).StartCharge();
+            _chargeControl.Received(1).StartCharge();
         }
 
         [Test]
         public void Rfid_Available_Connected_StateLocked()
         {
             _uut._state = StationControl.LadeskabState.Available;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             Assert.That(_uut._state, Is.EqualTo(StationControl.LadeskabState.Locked));
+        }
+
+        [Test]
+        public void Rfid_Available_Connected_Display()
+        {
+            _uut._state = StationControl.LadeskabState.Available;
+            _chargeControl.IsConnected().Returns(true);
+            _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
+            _display.Received(1).Print("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
         }
 
         [Test]
         public void Rfid_Available_NotConnected_DoorSame()
         {
             _uut._state = StationControl.LadeskabState.Available;
-            _charger.Connected.Returns(false);
+            _chargeControl.IsConnected().Returns(false);
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             _door.Received(0).LockDoor();
         }
@@ -71,18 +78,27 @@ namespace Ladeskab.Test.Unit
         public void Rfid_Available_NotConnected_ChargeSame()
         {
             _uut._state = StationControl.LadeskabState.Available;
-            _charger.Connected.Returns(false);
+            _chargeControl.IsConnected().Returns(false);
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
-            _charger.Received(0).StartCharge();
+            _chargeControl.Received(0).StartCharge();
         }
 
         [Test]
         public void Rfid_Available_NotConnected_StateSame()
         {
             _uut._state = StationControl.LadeskabState.Available;
-            _charger.Connected.Returns(false);
+            _chargeControl.IsConnected().Returns(false);
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             Assert.That(_uut._state, Is.EqualTo(StationControl.LadeskabState.Available));
+        }
+
+        [Test]
+        public void Rfid_Available_NotConnected_Display()
+        {
+            _uut._state = StationControl.LadeskabState.Available;
+            _chargeControl.IsConnected().Returns(false);
+            _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
+            _display.Received(1).Print("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
         }
 
         [Test]
@@ -90,7 +106,7 @@ namespace Ladeskab.Test.Unit
         {
             _uut._state = StationControl.LadeskabState.DoorOpen;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
-            _charger.DidNotReceive().StartCharge();
+            _chargeControl.DidNotReceive().StartCharge();
         }
 
         [Test]
@@ -98,14 +114,14 @@ namespace Ladeskab.Test.Unit
         {
             _uut._state = StationControl.LadeskabState.DoorOpen;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
-            _charger.DidNotReceive().StopCharge();
+            _chargeControl.DidNotReceive().StopCharge();
         }
 
         [Test]
         public void Rfid_Locked_CorrectRFID_DoorUnlocked()
         {
             _uut._state = StationControl.LadeskabState.Locked;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _uut._oldId = 3;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             _door.Received(1).UnlockDoor();
@@ -115,17 +131,27 @@ namespace Ladeskab.Test.Unit
         public void Rfid_Locked_CorrectRFID_StopCharge()
         {
             _uut._state = StationControl.LadeskabState.Locked;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _uut._oldId = 3;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
-            _charger.Received(1).StopCharge();
+            _chargeControl.Received(1).StopCharge();
+        }
+
+        [Test]
+        public void Rfid_Locked_CorrectRFID_Display()
+        {
+            _uut._state = StationControl.LadeskabState.Locked;
+            _chargeControl.IsConnected().Returns(true);
+            _uut._oldId = 3;
+            _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
+            _display.Received(1).Print("Tag din telefon ud af skabet og luk døren");
         }
 
         [Test]
         public void Rfid_Locked_CorrectRFID_StateAvailable()
         {
             _uut._state = StationControl.LadeskabState.Locked;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _uut._oldId = 3;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             Assert.That(_uut._state, Is.EqualTo(StationControl.LadeskabState.Available));
@@ -135,27 +161,37 @@ namespace Ladeskab.Test.Unit
         public void Rfid_Locked_WrongRFID_StopCharge()
         {
             _uut._state = StationControl.LadeskabState.Locked;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _uut._oldId = 2;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
-            _charger.Received(0).StopCharge();
+            _chargeControl.Received(0).StopCharge();
         }
 
         [Test]
         public void Rfid_Locked_WrongRFID_UnlockDoor()
         {
             _uut._state = StationControl.LadeskabState.Locked;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _uut._oldId = 2;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             _door.Received(0).UnlockDoor();
         }
 
         [Test]
+        public void Rfid_Locked_WrongRFID_Display()
+        {
+            _uut._state = StationControl.LadeskabState.Locked;
+            _chargeControl.IsConnected().Returns(true);
+            _uut._oldId = 2;
+            _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
+            _display.Received(1).Print("Forkert RFID tag");
+        }
+
+        [Test]
         public void Rfid_Locked_WrongRFID_StateSame()
         {
             _uut._state = StationControl.LadeskabState.Locked;
-            _charger.Connected.Returns(true);
+            _chargeControl.IsConnected().Returns(true);
             _uut._oldId = 2;
             _rfidReader.rfidEvent += Raise.EventWith(new rfidEventArgs() { id = 3 });
             Assert.That(_uut._state, Is.EqualTo(StationControl.LadeskabState.Locked));

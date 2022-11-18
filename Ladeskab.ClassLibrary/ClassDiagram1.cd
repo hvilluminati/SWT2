@@ -2,24 +2,11 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Ladeskab.ChargeControl">
     <Position X="10.5" Y="2.75" Width="4.25" />
-    <AssociationLine Name="DisplaySimulator" Type="Ladeskab.DisplaySimulator">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.921" Y="-10.52" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="UsbChargerSimulator" Type="Ladeskab.UsbChargerSimulator">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.935" Y="-9.473" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>QAABAAAAAAAAAABAAAAACAAAABAAAAEAAAABQAABAAA=</HashCode>
+      <HashCode>QAABAAAAAAAAAABAAAAACAAAAAAAAAEAAAAAQAABAAA=</HashCode>
       <FileName>ChargeControl.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="DisplaySimulator" />
-      <Property Name="UsbChargerSimulator" />
-    </ShowAsAssociation>
+    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
   </Class>
   <Class Name="Ladeskab.DisplaySimulator">
     <Position X="13.25" Y="6.5" Width="2" />
@@ -27,7 +14,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>DisplaySimulator.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.1" />
+    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
   </Class>
   <Class Name="Ladeskab.Door">
     <Position X="18" Y="10" Width="3" />
@@ -35,7 +22,7 @@
       <HashCode>AAAAAAAgAACAIAAIAAAAAAAAAAQAABAAAAAAAAACAAA=</HashCode>
       <FileName>Door.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.487" />
+    <Lollipop Orientation="Left" Position="0.487" Collapsed="true" />
   </Class>
   <Class Name="Ladeskab.LogFile">
     <Position X="18.25" Y="1.25" Width="2.5" />
@@ -43,7 +30,7 @@
       <HashCode>AAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>LogFile.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.414" />
+    <Lollipop Orientation="Left" Position="0.414" Collapsed="true" />
   </Class>
   <Class Name="Ladeskab.RfidReader">
     <Position X="14" Y="0.5" Width="3" />
@@ -51,7 +38,7 @@
       <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RfidReader.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.1" />
+    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
   </Class>
   <Class Name="Ladeskab.StationControl">
     <Position X="16" Y="4.5" Width="7" />
@@ -65,42 +52,11 @@
         </TypeIdentifier>
       </Enum>
     </NestedTypes>
-    <AssociationLine Name="DisplaySimulator" Type="Ladeskab.DisplaySimulator">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.64" Y="-10.145" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="RfidReader" Type="Ladeskab.RfidReader">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="1.597" Y="14.648" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="ChargeControl" Type="Ladeskab.ChargeControl">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-1.525" Y="-12.107" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="Door" Type="Ladeskab.Door">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="5.735" Y="-6.857" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="LogFile" Type="Ladeskab.LogFile">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="5.44" Y="14.125" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAQBIDAAAAAAIEAAAAIACAAAAACAEAAABCABAAAAAAA=</HashCode>
+      <HashCode>AAQBIBAAAAAAIEAAAAAACAAAAAAAEAAAACAAAAAAAAA=</HashCode>
       <FileName>StationControl.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="DisplaySimulator" />
-      <Property Name="RfidReader" />
-      <Property Name="ChargeControl" />
-      <Property Name="Door" />
-      <Property Name="LogFile" />
-    </ShowAsAssociation>
+    <Lollipop Orientation="Left" Position="0.169" Collapsed="true" />
   </Class>
   <Class Name="Ladeskab.UsbChargerSimulator">
     <Position X="11" Y="8" Width="4" />
@@ -108,7 +64,56 @@
       <HashCode>QAQQAAAQAAAgQAAAAAhCCAACAAAAAAEAAAAIUAAQEIA=</HashCode>
       <FileName>UsbChargerSimulator.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.1" />
+    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
   </Class>
+  <Interface Name="Ladeskab.Interfaces.IStationControl">
+    <Position X="8.25" Y="1" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IStationControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ladeskab.Interfaces.IChargeControl">
+    <Position X="7.5" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAABAAAAAAAAAAAAAAAEAAAAAQAAAAAA=</HashCode>
+      <FileName>Interfaces\IChargeControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ladeskab.Interfaces.IDisplay">
+    <Position X="5.5" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Interfaces\IDisplay.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ladeskab.Interfaces.IUsbCharger">
+    <Position X="3.5" Y="3.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAQAAAAAgAAAAAAAAAAAEAAAAAQAAAAAA=</HashCode>
+      <FileName>Interfaces\IUsbCharger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ladeskab.Interfaces.IDoor">
+    <Position X="5.5" Y="1" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAIAAAAAAAAAAQAABAAAAAAAAACAAA=</HashCode>
+      <FileName>Interfaces\IDoor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ladeskab.Interfaces.ILogFile">
+    <Position X="2.75" Y="7.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Interfaces\ILogFile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ladeskab.Interfaces.IRfidReader">
+    <Position X="1.25" Y="0.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IRfidReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

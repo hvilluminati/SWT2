@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace Ladeskab
 {
-    public class StationControl
+    public class StationControl : IStationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
         public enum LadeskabState
@@ -22,7 +22,7 @@ namespace Ladeskab
 
         // Her mangler flere member variable
         public LadeskabState _state;
-        private ChargeControl _chargeControl;
+        private IChargeControl _chargeControl;
         public int _oldId;
         private IDisplay _display;
         private IRfidReader _RfidReader;
@@ -30,7 +30,7 @@ namespace Ladeskab
         private ILogFile _logFile;
 
 
-        public StationControl(IDoor door, IRfidReader rfidReader, IDisplay display, ChargeControl chargeControl, string logFile)
+        public StationControl(IDoor door, IRfidReader rfidReader, IDisplay display, IChargeControl chargeControl, string logFile)
         {
             door.DoorEvent += DoorHandler;
             rfidReader.rfidEvent += RfidDetected;
@@ -39,46 +39,6 @@ namespace Ladeskab
             _chargeControl = chargeControl;
             _RfidReader = rfidReader;
             _logFile = new LogFile(logFile);
-        }
-
-        public DisplaySimulator DisplaySimulator
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public RfidReader RfidReader
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public ChargeControl ChargeControl
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public Door Door
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public LogFile LogFile
-        {
-            get => default;
-            set
-            {
-            }
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
@@ -95,12 +55,12 @@ namespace Ladeskab
                         _oldId = e.id;
                         _logFile.LogDoorLocked(e.id);
 
-                        Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+                        _display.Print("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
                         _state = LadeskabState.Locked;
                     }
                     else
                     {
-                        Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
+                        _display.Print("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
                     }
 
                     break;
@@ -117,12 +77,12 @@ namespace Ladeskab
                         _door.UnlockDoor();
                         _logFile.LogDoorUnlocked(e.id);
 
-                        Console.WriteLine("Tag din telefon ud af skabet og luk døren");
+                        _display.Print("Tag din telefon ud af skabet og luk døren");
                         _state = LadeskabState.Available;
                     }
                     else
                     {
-                        Console.WriteLine("Forkert RFID tag");
+                        _display.Print("Forkert RFID tag");
                     }
 
                     break;

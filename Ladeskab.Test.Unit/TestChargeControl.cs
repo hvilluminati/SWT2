@@ -8,6 +8,7 @@ using Ladeskab.Interfaces;
 using NUnit.Framework;
 using NSubstitute;
 using UsbSimulator;
+using System.Runtime.InteropServices;
 
 namespace Ladeskab.Test.Unit
 {
@@ -49,20 +50,33 @@ namespace Ladeskab.Test.Unit
             _usbCharger.Received(1).StopCharge();
         }
 
+        [TestCase(int.MaxValue)]
+        [TestCase(500.1)]
+        [TestCase(500)]
+        [TestCase(499.9)]
+        [TestCase(5.1)]
+        [TestCase(5)]
+        [TestCase(4.9)]
+        [TestCase(0.1)]
         [TestCase(0)]
-        [TestCase(2)]
-        [TestCase(100)]
-        [TestCase(600)]
+        [TestCase(int.MinValue)]
         public void CurrentChanged_IsCurrentUpdated(double newCurrent)
         {
             _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = newCurrent });
             Assert.That(_uut.CurrentValue, Is.EqualTo(newCurrent));
         }
 
-        [TestCase(100, "Charging", 1)]
-        [TestCase(600, "Error, charging will stop immediately", 1)]
-        [TestCase(2, "Fully charged", 1)]
+
+        [TestCase(int.MaxValue, "Error, charging will stop immediately", 1)]
+        [TestCase(500.1, "Error, charging will stop immediately", 1)]
+        [TestCase(500, "Charging", 1)]
+        [TestCase(499.9, "Charging", 1)]
+        [TestCase(5.1, "Charging", 1)]
+        [TestCase(5, "Fully charged", 1)]
+        [TestCase(4.9, "Fully charged", 1)]
+        [TestCase(0.1, "Fully charged", 1)]
         [TestCase(0, null, 0)]
+        [TestCase(int.MinValue, null, 0)]
         public void HandleCurrentValueEvent_DisplayMessages(double newCurrent, string msg, int received)
         {
             _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs() { Current = newCurrent });

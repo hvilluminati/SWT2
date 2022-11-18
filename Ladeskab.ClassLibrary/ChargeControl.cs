@@ -7,27 +7,11 @@ using Ladeskab.Interfaces;
 
 namespace Ladeskab
 {
-    public class ChargeControl
+    public class ChargeControl :IChargeControl
     {
         private IUsbCharger _usbCharger;
         private IDisplay _display;
         public double CurrentValue { get; set; }
-
-        public DisplaySimulator DisplaySimulator
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public UsbChargerSimulator UsbChargerSimulator
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public ChargeControl(IUsbCharger usbCharger, IDisplay display)
         {
