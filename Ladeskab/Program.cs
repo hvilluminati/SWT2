@@ -6,12 +6,12 @@ class Program
     {
 
         // Assemble your system here from all the classes
-        RfidReader rfidReader = new RfidReader();
-        Door door = new Door();
-        DisplaySimulator display = new DisplaySimulator();
-        UsbChargerSimulator charger = new UsbChargerSimulator();
-        ChargeControl chargeControl = new ChargeControl(charger, display);
-        StationControl stationControl = new StationControl(door,  rfidReader, display, chargeControl, "LogFile.txt");
+        IRfidReader rfidReader = new RfidReader();
+        IDoor door = new Door();
+        IDisplay display = new DisplaySimulator();
+        IUsbCharger charger = new UsbChargerSimulator();
+        IChargeControl chargeControl = new ChargeControl(charger, display);
+        IStationControl stationControl = new StationControl(door,  rfidReader, display, chargeControl, "LogFile.txt");
 
         bool finish = false;
         do
